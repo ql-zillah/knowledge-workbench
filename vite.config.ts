@@ -4,6 +4,9 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
+  // GitHub Pages 部署：base 设为仓库名
+  // 如果以后用自定义域名，改回 '/' 即可
+  base: '/knowledge-workbench/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
