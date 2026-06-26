@@ -88,10 +88,10 @@ export function SettingsPage() {
 
     const { error } = await supabase
       .from('user_settings')
-      .upsert({
-        user_id: user?.id,
+      .update({
         ...updateData,
       })
+      .eq('user_id', user?.id)
 
     if (error) {
       alert('保存失败: ' + error.message)
@@ -108,12 +108,12 @@ export function SettingsPage() {
 
     const { error } = await supabase
       .from('user_settings')
-      .upsert({
-        user_id: user?.id,
+      .update({
         nickname: nickname.trim() || null,
         main_goal: mainGoal.trim() || null,
         current_tools: currentTools.trim() || null,
       })
+      .eq('user_id', user?.id)
 
     if (error) {
       alert('保存失败: ' + error.message)
