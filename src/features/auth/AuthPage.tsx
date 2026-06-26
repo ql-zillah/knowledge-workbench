@@ -34,30 +34,40 @@ export function AuthPage() {
     setLoading(true)
 
     try {
+      let result;
       if (mode === 'signup') {
-        // 注册
-        // 注意：Supabase 默认可能开启邮箱确认，你可以在
-        // Dashboard → Authentication → Settings 中关闭 "Confirm email"
-        // 这样注册后直接登录，不需要点确认链接
-        const { error } = await supabase.auth.signUp({ email, password })
-        if (error) throw error
-        // 注册成功后 App.tsx 的 onAuthStateChange 会自动更新状态
+        result = await supabase.auth.signUp({ email, password })
+        if (result.error) throw result.error
+
+        // 注册成功但 session 为 null（mailer_autoconfirm 模式下）→ 自动登录
+        if (!result.data.session) {
+          const loginResult = await supabase.auth.signInWithPassword({ email, password })
+          if (loginResult.error) throw loginResult.error
+        }
       } else {
-        // 登录
-        // REQ-AUTH-04
-        const { error } = await supabase.auth.signInWithPassword({ email, password })
-        if (error) throw error
+        result = await supabase.auth.signInWithPassword({ email, password })
+        if (result.error) throw result.error
       }
-    } catch (err) {
-      // 错误处理（邮箱重复、密码错误等）
-      const message = err instanceof Error ? err.message : '操作失败'
-      // 友好化常见错误提示
-      if (message.includes('already registered')) {
+    } catch (err: any) {
+      // Supabase Auth 错误处理
+      // err 可能是 AuthError 对象，也可能是普通 Error
+      const rawMessage = err?.message || err?.msg || err?.error_description || ''
+      const rawCode = err?.code || err?.status || ''
+
+      // 按错误码和关键词友好化
+      if (rawCode === 'user_already_exists' || rawMessage.includes('already') || rawMessage.includes('registered') || rawMessage.includes('exists') || rawMessage.includes('注册')) {
         setError('该邮箱已注册')
-      } else if (message.includes('Invalid login')) {
+      } else if (rawCode === 'invalid_credentials' || rawMessage.includes('Invalid') || rawMessage.includes('credential') || rawMessage.includes('密码')) {
         setError('邮箱或密码错误')
+      } else if (rawMessage.includes('email') && rawMessage.includes('confirm')) {
+        setError('请先验证邮箱（检查确认邮件）')
+      } else if (rawMessage.includes('rate') || rawMessage.includes('limit')) {
+        setError('操作太频繁，请稍后再试')
+      } else if (rawMessage) {
+        // 兜底：显示原始错误（调试用，后续可去掉）
+        setError('操作失败: ' + rawMessage)
       } else {
-        setError(message)
+        setError('操作失败，请检查网络连接')
       }
     } finally {
       setLoading(false)
