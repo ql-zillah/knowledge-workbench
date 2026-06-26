@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   全局基础样式
+   ============================================================ */
+
+@layer base {
+  body {
+    @apply bg-bg text-text-main;
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC',
+      'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+}
+
+/* ============================================================
+   通用组件样式（用 @apply 复用 Tailwind 类）
+   ============================================================ */
+
+@layer components {
+  /* 卡片容器 */
+  .card {
+    @apply bg-card rounded-lg p-6 mb-5 shadow-card border border-border;
+  }
+
+  /* 主按钮 */
+  .btn-primary {
+    @apply inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm text-sm font-semibold
+           bg-primary text-white cursor-pointer border-none
+           transition-all duration-200 hover:bg-primary-dark;
+  }
+
+  /* 次要按钮 */
+  .btn-secondary {
+    @apply inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm text-sm font-semibold
+           bg-secondary-light text-secondary cursor-pointer border-none
+           transition-all duration-200;
+  }
+
+  /* 输入框 */
+  .form-input {
+    @apply w-full px-3.5 py-2.5 border border-border rounded-sm text-sm
+           bg-[#FDFAF6] transition-all duration-200
+           focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-light;
+  }
+
+  .form-textarea {
+    @apply form-input;
+    resize: vertical;
+    min-height: 80px;
+  }
+}
