@@ -12,6 +12,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
 import type { ParaItem, ParaCategory } from '@/types'
+import { KnowledgeGraph } from './KnowledgeGraph'
 
 // 分类配置
 const categoryConfig: Record<ParaCategory, { label: string; icon: string; color: string; bg: string; desc: string }> = {
@@ -22,6 +23,7 @@ const categoryConfig: Record<ParaCategory, { label: string; icon: string; color:
 }
 
 export function OrganizePage() {
+  const [view, setView] = useState<'para' | 'graph'>('para')
   const [items, setItems] = useState<ParaItem[]>([])
   const [noteCounts, setNoteCounts] = useState<Record<string, number>>({})
   const [loading, setLoading] = useState(true)
@@ -117,11 +119,40 @@ export function OrganizePage() {
     return <p className="text-text-muted text-sm">加载中…</p>
   }
 
+  function handleNavigateNote(id: string) {
+    // 通过事件通知 NotesPage 打开对应笔记
+    window.dispatchEvent(new CustomEvent('navigate-note', { detail: { id } }))
+  }
+
   return (
     <div>
-      <h1 className="text-xl font-bold mb-1">🗂 PARA 知识分类</h1>
+      <div className="flex items-center justify-between mb-1">
+        <h1 className="text-xl font-bold">🗂 PARA 知识分类</h1>
+        {/* 视图切换 */}
+        <div className="flex gap-1 p-0.5 bg-[#F5F0E8] rounded-lg">
+          <button
+            onClick={() => setView('para')}
+            className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-all ${
+              view === 'para' ? 'bg-card text-primary shadow-sm' : 'text-text-secondary'
+            }`}
+          >
+            📂 分类
+          </button>
+          <button
+            onClick={() => setView('graph')}
+            className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-all ${
+              view === 'graph' ? 'bg-card text-primary shadow-sm' : 'text-text-secondary'
+            }`}
+          >
+            🕸️ 图谱
+          </button>
+        </div>
+      </div>
       <p className="text-sm text-text-secondary mb-6">按「可操作性」分类，让知识井井有条</p>
 
+      {view === 'graph' ? (
+        <KnowledgeGraph onNavigateNote={handleNavigateNote} />
+      ) : (
       <div className="space-y-5">
         {(['project', 'area', 'resource', 'archive'] as ParaCategory[]).map(category => {
           const config = categoryConfig[category]
@@ -185,6 +216,7 @@ export function OrganizePage() {
           )
         })}
       </div>
+      )}
     </div>
   )
 }

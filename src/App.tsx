@@ -28,6 +28,7 @@ import { OrganizePage } from '@/features/organize/OrganizePage'
 import { OutputPage } from '@/features/output/OutputPage'
 import { ReviewPage } from '@/features/review/ReviewPage'
 import { SettingsPage } from '@/features/settings/SettingsPage'
+import { AIChatPage } from '@/features/ai/AIChatPage'
 
 export default function App() {
   // 登录状态管理
@@ -80,6 +81,7 @@ export default function App() {
         <Route path="/output" element={<OutputPage />} />
         <Route path="/review" element={<ReviewPage />} />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/ai" element={<AIChatPage />} />
         {/* 未知路由重定向到闪念捕获 */}
         <Route path="*" element={<Navigate to="/capture" replace />} />
       </Routes>

@@ -19,7 +19,7 @@ const navItems = [
   { path: '/capture', label: '💡 闪念', },
   { path: '/notes', label: '📖 笔记' },
   { path: '/organize', label: '📂 PARA' },
-  { path: '/output', label: '🔮 产出' },
+  { path: '/ai', label: '💬 AI' },
   { path: '/review', label: '📋 复盘' },
   { path: '/settings', label: '⚙️' },
 ]

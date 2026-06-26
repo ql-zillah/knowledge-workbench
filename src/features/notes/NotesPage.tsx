@@ -15,6 +15,9 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
+import { LinkableTextarea } from '@/components/editor/LinkableTextarea'
+import { LinkedText } from '@/components/editor/LinkedText'
+import { BacklinksPanel } from '@/components/editor/BacklinksPanel'
 import type { Note, NoteType, Maturity, ParaItem } from '@/types'
 
 export function NotesPage() {
@@ -207,7 +210,9 @@ function NoteCard({ note, onEdit, onDelete }: {
       </div>
 
       <h3 className="font-bold text-base mb-1.5">{note.title}</h3>
-      <p className="text-sm text-text-secondary line-clamp-2">{note.core_viewpoint}</p>
+      <div className="text-sm text-text-secondary line-clamp-2">
+        <LinkedText text={note.core_viewpoint} />
+      </div>
 
       {/* 标签 */}
       {note.tags.length > 0 && (
@@ -304,6 +309,31 @@ function NoteEditor({ note, prefill, paraItems, onSaved, onCancel }: {
     setPhotos(photos.filter((_, i) => i !== index))
   }
 
+  // 解析 [[链接]] 并同步到 note_links 表
+  async function syncLinks(noteId: string, text1: string, text2: string) {
+    const combined = (text1 + ' ' + text2)
+    const matches = combined.matchAll(/\[\[(.+?)\]\]/g)
+    const linkTitles = [...matches].map(m => m[1].trim()).filter(Boolean)
+    if (linkTitles.length === 0) return
+
+    // 查找匹配的笔记
+    const { data: linkedNotes } = await supabase
+      .from('notes')
+      .select('id, title')
+      .in('title', linkTitles)
+
+    if (linkedNotes && linkedNotes.length > 0) {
+      // 先删除旧链接，再插入新链接
+      await supabase.from('note_links').delete().eq('source_note_id', noteId)
+      const links = linkedNotes
+        .filter(n => n.id !== noteId) // 不链接自己
+        .map(n => ({ source_note_id: noteId, target_note_id: n.id }))
+      if (links.length > 0) {
+        await supabase.from('note_links').upsert(links, { onConflict: 'source_note_id,target_note_id' })
+      }
+    }
+  }
+
   // 保存笔记
   async function handleSave() {
     // REQ-NOTE-07：必填项校验
@@ -344,14 +374,24 @@ function NoteEditor({ note, prefill, paraItems, onSaved, onCancel }: {
         .update(payload)
         .eq('id', note.id)
       if (error) setError('保存失败: ' + error.message)
-      else onSaved()
+      else {
+        // 更新链接关系
+        await syncLinks(note.id, myUnderstanding, knowledgeLinks)
+        onSaved()
+      }
     } else {
       // 新建
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('notes')
         .insert(payload)
+        .select('id')
+        .single()
       if (error) setError('保存失败: ' + error.message)
-      else onSaved()
+      else {
+        // 创建链接关系
+        if (data) await syncLinks(data.id, myUnderstanding, knowledgeLinks)
+        onSaved()
+      }
     }
 
     setSaving(false)
@@ -422,10 +462,10 @@ function NoteEditor({ note, prefill, paraItems, onSaved, onCancel }: {
           <label className="block text-xs font-semibold text-text-secondary mb-1.5">
             我的理解（用自己的话写）
           </label>
-          <textarea
+          <LinkableTextarea
             value={myUnderstanding}
-            onChange={e => setMyUnderstanding(e.target.value)}
-            placeholder="用自己的话复述，不要照抄原文"
+            onChange={setMyUnderstanding}
+            placeholder="用自己的话复述，不要照抄原文。输入 [[ 可以链接到已有笔记"
             className="form-textarea min-h-[120px]"
           />
         </div>
@@ -435,11 +475,11 @@ function NoteEditor({ note, prefill, paraItems, onSaved, onCancel }: {
           <label className="block text-xs font-semibold text-text-secondary mb-1.5">
             🔗 知识关联（和已有知识的联系）
           </label>
-          <input
+          <LinkableTextarea
             value={knowledgeLinks}
-            onChange={e => setKnowledgeLinks(e.target.value)}
-            placeholder="这条笔记和哪些已有知识相关？"
-            className="form-input"
+            onChange={setKnowledgeLinks}
+            placeholder="这条笔记和哪些已有知识相关？输入 [[ 链接到已有笔记"
+            className="form-textarea min-h-[60px]"
           />
         </div>
 
@@ -564,6 +604,9 @@ function NoteEditor({ note, prefill, paraItems, onSaved, onCancel }: {
           </button>
           <button onClick={onCancel} className="btn-secondary">取消</button>
         </div>
+
+        {/* 反向链接（仅编辑已有笔记时显示） */}
+        {note && <BacklinksPanel noteId={note.id} />}
       </div>
     </div>
   )
