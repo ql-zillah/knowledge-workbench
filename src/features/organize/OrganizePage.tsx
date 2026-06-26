@@ -166,13 +166,13 @@ export function OrganizePage() {
                         </span>
                         <button
                           onClick={() => handleEdit(item)}
-                          className="text-xs text-text-muted hover:text-secondary opacity-0 group-hover:opacity-100"
+                          className="text-xs text-secondary hover:underline"
                         >
                           编辑
                         </button>
                         <button
                           onClick={() => handleDelete(item)}
-                          className="text-xs text-text-muted hover:text-red-500 opacity-0 group-hover:opacity-100"
+                          className="text-xs text-red-400 hover:text-red-600 hover:underline"
                         >
                           删除
                         </button>

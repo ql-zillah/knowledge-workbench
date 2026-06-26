@@ -245,7 +245,7 @@ export function CapturePage() {
               {!selectMode && (
                 <button
                   onClick={() => handleDelete(note.id)}
-                  className="text-xs text-text-muted hover:text-red-500 opacity-0 group-hover:opacity-100"
+                  className="text-xs text-red-400 hover:text-red-600 hover:underline px-2 py-1 rounded hover:bg-red-50 transition-all"
                 >
                   删除
                 </button>

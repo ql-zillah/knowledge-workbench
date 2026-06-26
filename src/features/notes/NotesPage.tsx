@@ -225,9 +225,9 @@ function NoteCard({ note, onEdit, onDelete }: {
         <span className="text-xs text-text-muted">
           {new Date(note.updated_at).toLocaleDateString('zh-CN')}
         </span>
-        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="flex gap-2">
           <button onClick={onEdit} className="text-xs text-secondary hover:underline">编辑</button>
-          <button onClick={onDelete} className="text-xs text-red-400 hover:underline">删除</button>
+          <button onClick={onDelete} className="text-xs text-red-400 hover:text-red-600 hover:underline">删除</button>
         </div>
       </div>
     </div>
@@ -530,7 +530,7 @@ function NoteEditor({ note, prefill, paraItems, onSaved, onCancel }: {
                 <img src={url} alt={`照片${i+1}`} className="w-full h-full object-cover rounded-md border border-border" />
                 <button
                   onClick={() => removePhoto(i)}
-                  className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full text-xs"
                 >
                   ×
                 </button>

@@ -205,7 +205,7 @@ export function OutputPage() {
                   </div>
                   <button
                     onClick={() => handleDelete(output.id)}
-                    className="text-xs text-text-muted hover:text-red-500 opacity-0 group-hover:opacity-100"
+                    className="text-xs text-red-400 hover:text-red-600 hover:underline"
                   >
                     删除
                   </button>
