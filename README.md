@@ -1,32 +1,79 @@
-# React + TypeScript + Vite
+# 阅读岔路管理
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> 阅读过程中实时捕获「岔路」，事后回来处理 —— 让灵感不再随阅读消散。
 
-Currently, two official plugins are available:
+## 定位
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+读长文时遇到不熟悉的概念/领域，快速标记一条「岔路」（记下书名 + 页码 + 当时在想什么），**不打断主线继续读**；读完之后再回到岔路栈逐条查证、补充、串联。
 
-## React Compiler
+## 核心洞察：事中 vs 事后
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+现有知识管理工具都解决「**事后整理**」，但真正的痛点发生在「**阅读过程中**」—— 灵感在那时就消散了，事后整理的是残缺的记忆，而不是当时的真实想法。
 
-## Expanding the Oxlint configuration
+**差异化不在功能多少，而在切入时机。**
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## 这不是什么
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+- ❌ 不是另一个 Notion —— 不做事后整理、不做知识库管理
+- ❌ 不是另一个 Obsidian —— 不做双向链接图谱
+- ❌ 不是阅读器 —— 不做书籍阅读功能本身
+- ❌ 不是笔记工具 —— 核心不是记录功能，是**上下文保留**
+
+## 核心数据模型：阅读上下文快照
+
+每条岔路完整保存四个维度：
+
+| 维度 | 字段 | 含义 |
+|------|------|------|
+| 位置锚定 | 书名、作者、章节、页码、页码范围 | 我在读哪一页 |
+| 分支标记 | 领域、子领域、标签 | 岔路属于什么领域 |
+| 思维快照 | 当时想法、引申灵感 | 脑子里当时冒出了什么 |
+| 上下文关联 | 触发原文、与原文的关系 | 岔路和原文有什么关系 |
+
+## 功能
+
+- **登录 / 注册**：邮箱 + 密码（Supabase Auth）
+- **新建岔路**（快速表单）：书名 + 页码 + 领域 + 灵感，几秒内完成标记
+- **岔路栈**：卡片列表呈现，支持搜索、按书名/领域/状态筛选、按时间/优先级/书名排序
+- **读后补充**（完整表单）：作者、章节、页码范围、阅读场次、子领域、标签、触发原文、与原文关系
+- **状态标记**：待探索 → 探索中 → 已解决 → 已归档，标记每条岔路的查证进度
+- **AI 问答**：内置 DeepSeek 对话（流式输出），在平台内直接查证概念
+- **数据持久化**：Supabase 云端存储 + 软删除
+
+## 技术栈
+
+- React 19 + TypeScript + Vite
+- Tailwind CSS 4
+- Supabase（Auth + PostgreSQL）
+
+## 本地开发
+
+```bash
+npm install
+cp .env.local.example .env.local   # 填入真实值
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+`.env.local` 需要三个变量：
+
+| 变量 | 说明 |
+|------|------|
+| `VITE_SUPABASE_URL` | Supabase 项目 URL |
+| `VITE_SUPABASE_ANON_KEY` | Supabase 匿名公钥 |
+| `VITE_DEEPSEEK_API_KEY` | DeepSeek API Key（AI 问答用） |
+
+数据库建表与 RLS 策略见 [`supabase-auth-migration.sql`](./supabase-auth-migration.sql)。
+
+## 部署
+
+线上地址：https://ql-zillah.github.io/knowledge-workbench/
+
+```bash
+npm run deploy   # 构建并部署到 GitHub Pages（gh-pages 分支）
+```
+
+## 项目文档
+
+- [`docs/项目全貌文档.md`](./docs/项目全貌文档.md) —— 项目定位、痛点、核心假设
+- [`docs/产品思考备忘录.md`](./docs/产品思考备忘录.md) —— 产品思考过程
+- [`docs/阅读岔路管理_趋势分析报告.md`](./docs/阅读岔路管理_趋势分析报告.md) —— 市场趋势与竞品调研
