@@ -60,7 +60,7 @@ export default function ForkForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       {/* ===== 快速模式：4 个核心字段 ===== */}
-      <div className="rounded-xl bg-white p-5 shadow-sm border border-gray-100 space-y-4">
+      <div className="rounded-xl bg-white p-5 shadow-sm border border-amber-100 space-y-4">
         {/* 书名 */}
         <div>
           <label className="mb-1.5 block text-sm font-medium text-gray-700">
@@ -73,7 +73,7 @@ export default function ForkForm({
             onChange={(e) => update('book_title', e.target.value)}
             placeholder={lastBookTitle ? `如：《${lastBookTitle}》` : '输入书名'}
             list="book-titles"
-            className="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+            className="w-full rounded-lg border border-amber-200 px-3 py-2.5 text-sm text-gray-900 placeholder-amber-400 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
           />
           <datalist id="book-titles">
             {bookTitles.map((title) => (
@@ -92,7 +92,7 @@ export default function ForkForm({
             value={form.page_number}
             onChange={(e) => update('page_number', e.target.value)}
             placeholder="如：87"
-            className="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+            className="w-full rounded-lg border border-amber-200 px-3 py-2.5 text-sm text-gray-900 placeholder-amber-400 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
             autoFocus
           />
         </div>
@@ -107,7 +107,7 @@ export default function ForkForm({
             value={form.domain}
             onChange={(e) => update('domain', e.target.value)}
             placeholder="如：认知心理学、计量经济学"
-            className="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+            className="w-full rounded-lg border border-amber-200 px-3 py-2.5 text-sm text-gray-900 placeholder-amber-400 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
           />
         </div>
 
@@ -121,7 +121,7 @@ export default function ForkForm({
             onChange={(e) => update('thought', e.target.value)}
             placeholder="记录此刻脑海中的想法、疑问或关联…"
             rows={3}
-            className="w-full resize-none rounded-lg border border-gray-200 px-3 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+            className="w-full resize-none rounded-lg border border-amber-200 px-3 py-2.5 text-sm text-gray-900 placeholder-amber-400 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
           />
         </div>
       </div>
@@ -130,7 +130,7 @@ export default function ForkForm({
       <button
         type="button"
         onClick={() => setExpanded(!expanded)}
-        className="flex w-full items-center justify-center gap-1.5 rounded-lg py-2 text-sm text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+        className="flex w-full items-center justify-center gap-1.5 rounded-lg py-2 text-sm text-gray-500 hover:text-amber-600 hover:bg-amber-100 transition-colors"
       >
         {expanded ? (
           <>
@@ -151,9 +151,9 @@ export default function ForkForm({
 
       {/* ===== 完整模式：所有字段 ===== */}
       {expanded && (
-        <div className="rounded-xl bg-white p-5 shadow-sm border border-gray-100 space-y-4">
+        <div className="rounded-xl bg-white p-5 shadow-sm border border-amber-100 space-y-4">
           {/* 位置锚定补充 */}
-          <fieldset className="rounded-lg border border-gray-200 p-4">
+          <fieldset className="rounded-lg border border-amber-200 p-4">
             <legend className="px-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
               位置锚定（补充）
             </legend>
@@ -164,7 +164,7 @@ export default function ForkForm({
                   type="text"
                   value={form.author}
                   onChange={(e) => update('author', e.target.value)}
-                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                  className="w-full rounded-lg border border-amber-200 px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
                 />
               </div>
               <div>
@@ -174,7 +174,7 @@ export default function ForkForm({
                   value={form.chapter}
                   onChange={(e) => update('chapter', e.target.value)}
                   placeholder="如：第3章"
-                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                  className="w-full rounded-lg border border-amber-200 px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
                 />
               </div>
               <div>
@@ -184,7 +184,7 @@ export default function ForkForm({
                   value={form.page_range}
                   onChange={(e) => update('page_range', e.target.value)}
                   placeholder="如：45-47"
-                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                  className="w-full rounded-lg border border-amber-200 px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
                 />
               </div>
               <div>
@@ -194,14 +194,14 @@ export default function ForkForm({
                   value={form.reading_session}
                   onChange={(e) => update('reading_session', e.target.value)}
                   placeholder="如：7月4日下午"
-                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                  className="w-full rounded-lg border border-amber-200 px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
                 />
               </div>
             </div>
           </fieldset>
 
           {/* 分支标记补充 */}
-          <fieldset className="rounded-lg border border-gray-200 p-4">
+          <fieldset className="rounded-lg border border-amber-200 p-4">
             <legend className="px-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
               分支标记（补充）
             </legend>
@@ -213,7 +213,7 @@ export default function ForkForm({
                   value={form.sub_domain}
                   onChange={(e) => update('sub_domain', e.target.value)}
                   placeholder="如：工作记忆模型"
-                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                  className="w-full rounded-lg border border-amber-200 px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
                 />
               </div>
               <div>
@@ -223,14 +223,14 @@ export default function ForkForm({
                   value={form.tags}
                   onChange={(e) => update('tags', e.target.value)}
                   placeholder="如：推荐系统, 协同过滤"
-                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                  className="w-full rounded-lg border border-amber-200 px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
                 />
               </div>
             </div>
           </fieldset>
 
           {/* 思维快照补充 */}
-          <fieldset className="rounded-lg border border-gray-200 p-4">
+          <fieldset className="rounded-lg border border-amber-200 p-4">
             <legend className="px-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
               思维快照（补充）
             </legend>
@@ -241,13 +241,13 @@ export default function ForkForm({
                 onChange={(e) => update('inspiration', e.target.value)}
                 placeholder="读完之后的延伸思考…"
                 rows={2}
-                className="w-full resize-none rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                className="w-full resize-none rounded-lg border border-amber-200 px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
               />
             </div>
           </fieldset>
 
           {/* 上下文关联 */}
-          <fieldset className="rounded-lg border border-gray-200 p-4">
+          <fieldset className="rounded-lg border border-amber-200 p-4">
             <legend className="px-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
               上下文关联
             </legend>
@@ -259,7 +259,7 @@ export default function ForkForm({
                   onChange={(e) => update('original_quote', e.target.value)}
                   placeholder="摘录原文…"
                   rows={2}
-                  className="w-full resize-none rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                  className="w-full resize-none rounded-lg border border-amber-200 px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
                 />
               </div>
               <div>
@@ -269,7 +269,7 @@ export default function ForkForm({
                   value={form.relationship}
                   onChange={(e) => update('relationship', e.target.value)}
                   placeholder="如：对原文假设的质疑、想深入的理论背景"
-                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                  className="w-full rounded-lg border border-amber-200 px-3 py-2 text-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
                 />
               </div>
             </div>
@@ -282,7 +282,7 @@ export default function ForkForm({
               <select
                 value={form.status}
                 onChange={(e) => update('status', e.target.value)}
-                className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm focus:border-indigo-400 focus:outline-none"
+                className="w-full rounded-lg border border-amber-200 bg-white px-3 py-2.5 text-sm focus:border-amber-400 focus:outline-none"
               >
                 {(Object.entries(STATUS_LABELS) as [string, string][]).map(
                   ([value, label]) => (
@@ -315,14 +315,14 @@ export default function ForkForm({
         <button
           type="button"
           onClick={onCancel}
-          className="flex-1 rounded-lg border border-gray-200 bg-white py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+          className="flex-1 rounded-lg border border-amber-200 bg-white py-2.5 text-sm font-medium text-gray-700 hover:bg-amber-50 transition-colors"
         >
           取消
         </button>
         <button
           type="submit"
           disabled={saving || !form.book_title.trim()}
-          className="flex-1 rounded-lg bg-indigo-600 py-2.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
+          className="flex-1 rounded-lg bg-amber-500 py-2.5 text-sm font-medium text-white hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
         >
           {saving ? '保存中…' : isEdit ? '保存修改' : '标记岔路 ✓'}
         </button>

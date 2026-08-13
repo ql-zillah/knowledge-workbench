@@ -127,7 +127,7 @@ export const STATUS_LABELS: Record<ForkStatus, string> = {
 
 export const STATUS_COLORS: Record<ForkStatus, string> = {
   open: 'bg-amber-100 text-amber-800',
-  exploring: 'bg-blue-100 text-blue-800',
+  exploring: 'bg-amber-100 text-amber-800',
   resolved: 'bg-green-100 text-green-800',
-  archived: 'bg-gray-100 text-gray-500',
+  archived: 'bg-amber-50 text-gray-500',
 };

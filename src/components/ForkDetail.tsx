@@ -14,7 +14,7 @@ export default function ForkDetail({ fork, onEdit, onDelete, onStatusChange }: P
   return (
     <div className="space-y-6">
       {/* ===== 位置锚定 ===== */}
-      <section className="rounded-xl bg-white p-5 shadow-sm border border-gray-100">
+      <section className="rounded-xl bg-white p-5 shadow-sm border border-amber-100">
         <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
           位置锚定
         </h3>
@@ -25,7 +25,7 @@ export default function ForkDetail({ fork, onEdit, onDelete, onStatusChange }: P
           {fork.author && <span>作者：{fork.author}</span>}
           {fork.chapter && <span>{fork.chapter}</span>}
           {fork.page_number && (
-            <span className="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-xs font-mono">
+            <span className="inline-flex items-center rounded-md bg-amber-50 px-2 py-0.5 text-xs font-mono">
               p.{fork.page_number}{fork.page_range ? ` (${fork.page_range})` : ''}
             </span>
           )}
@@ -36,13 +36,13 @@ export default function ForkDetail({ fork, onEdit, onDelete, onStatusChange }: P
       </section>
 
       {/* ===== 分支标记 ===== */}
-      <section className="rounded-xl bg-white p-5 shadow-sm border border-gray-100">
+      <section className="rounded-xl bg-white p-5 shadow-sm border border-amber-100">
         <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
           分支标记
         </h3>
         <div className="flex flex-wrap items-center gap-2">
           {fork.domain && (
-            <span className="rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-700">
+            <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-medium text-amber-800">
               {fork.domain}
             </span>
           )}
@@ -55,7 +55,7 @@ export default function ForkDetail({ fork, onEdit, onDelete, onStatusChange }: P
             {fork.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-md bg-gray-100 px-2 py-0.5 text-xs text-gray-600"
+                className="rounded-md bg-amber-50 px-2 py-0.5 text-xs text-gray-600"
               >
                 #{tag}
               </span>
@@ -65,7 +65,7 @@ export default function ForkDetail({ fork, onEdit, onDelete, onStatusChange }: P
       </section>
 
       {/* ===== 思维快照 ===== */}
-      <section className="rounded-xl bg-white p-5 shadow-sm border border-gray-100">
+      <section className="rounded-xl bg-white p-5 shadow-sm border border-amber-100">
         <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
           思维快照
         </h3>
@@ -91,12 +91,12 @@ export default function ForkDetail({ fork, onEdit, onDelete, onStatusChange }: P
       </section>
 
       {/* ===== 上下文关联 ===== */}
-      <section className="rounded-xl bg-white p-5 shadow-sm border border-gray-100">
+      <section className="rounded-xl bg-white p-5 shadow-sm border border-amber-100">
         <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
           上下文关联
         </h3>
         {fork.original_quote && (
-          <blockquote className="mb-3 border-l-4 border-gray-300 pl-4 italic text-gray-600">
+          <blockquote className="mb-3 border-l-4 border-amber-300 pl-4 italic text-gray-600">
             {fork.original_quote}
           </blockquote>
         )}
@@ -109,7 +109,7 @@ export default function ForkDetail({ fork, onEdit, onDelete, onStatusChange }: P
       </section>
 
       {/* ===== 状态 + 优先级 ===== */}
-      <section className="rounded-xl bg-white p-5 shadow-sm border border-gray-100">
+      <section className="rounded-xl bg-white p-5 shadow-sm border border-amber-100">
         <div className="flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-3">
             <span className="text-sm text-gray-500">状态：</span>
@@ -119,7 +119,7 @@ export default function ForkDetail({ fork, onEdit, onDelete, onStatusChange }: P
               onChange={(e) =>
                 onStatusChange(e.target.value as ReadingFork['status'])
               }
-              className="rounded-lg border border-gray-200 bg-white px-2 py-1 text-sm text-gray-700 focus:border-indigo-400 focus:outline-none"
+              className="rounded-lg border border-amber-200 bg-white px-2 py-1 text-sm text-gray-700 focus:border-amber-400 focus:outline-none"
             >
               <option value="open">待探索</option>
               <option value="exploring">探索中</option>
@@ -145,7 +145,7 @@ export default function ForkDetail({ fork, onEdit, onDelete, onStatusChange }: P
         <button
           type="button"
           onClick={onEdit}
-          className="flex-1 rounded-lg border border-gray-200 bg-white py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+          className="flex-1 rounded-lg border border-amber-200 bg-white py-2.5 text-sm font-medium text-gray-700 hover:bg-amber-50 transition-colors"
         >
           编辑补充
         </button>

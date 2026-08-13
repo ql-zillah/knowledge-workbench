@@ -40,7 +40,7 @@ export default function SearchBar({
           onChange={(e) =>
             onFiltersChange({ ...filters, search: e.target.value || undefined })
           }
-          className="w-full rounded-lg border border-gray-200 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100 transition-shadow"
+          className="w-full rounded-lg border border-amber-200 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder-amber-400 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 transition-shadow"
         />
       </div>
 
@@ -56,7 +56,7 @@ export default function SearchBar({
                 book_title: e.target.value || undefined,
               })
             }
-            className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-700 focus:border-indigo-400 focus:outline-none"
+            className="rounded-lg border border-amber-200 bg-white px-3 py-1.5 text-sm text-gray-700 focus:border-amber-400 focus:outline-none"
           >
             <option value="">全部书名</option>
             {bookTitles.map((title) => (
@@ -77,7 +77,7 @@ export default function SearchBar({
                 domain: e.target.value || undefined,
               })
             }
-            className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-700 focus:border-indigo-400 focus:outline-none"
+            className="rounded-lg border border-amber-200 bg-white px-3 py-1.5 text-sm text-gray-700 focus:border-amber-400 focus:outline-none"
           >
             <option value="">全部领域</option>
             {domains.map((d) => (
@@ -97,7 +97,7 @@ export default function SearchBar({
               status: (e.target.value || undefined) as ForkStatus | undefined,
             })
           }
-          className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-700 focus:border-indigo-400 focus:outline-none"
+          className="rounded-lg border border-amber-200 bg-white px-3 py-1.5 text-sm text-gray-700 focus:border-amber-400 focus:outline-none"
         >
           <option value="">全部状态</option>
           {statuses.map((s) => (
@@ -116,7 +116,7 @@ export default function SearchBar({
               sort_by: e.target.value as 'created_at' | 'priority' | 'book_title',
             })
           }
-          className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-700 focus:border-indigo-400 focus:outline-none"
+          className="rounded-lg border border-amber-200 bg-white px-3 py-1.5 text-sm text-gray-700 focus:border-amber-400 focus:outline-none"
         >
           <option value="created_at">按时间</option>
           <option value="priority">按优先级</option>

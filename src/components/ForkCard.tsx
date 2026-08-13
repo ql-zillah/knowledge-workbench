@@ -13,12 +13,12 @@ export default function ForkCard({ fork, onClick }: Props) {
     <button
       type="button"
       onClick={onClick}
-      className="w-full rounded-xl bg-white p-4 text-left shadow-sm border border-gray-100 hover:shadow-md hover:border-indigo-200 transition-all"
+      className="w-full rounded-xl bg-white p-4 text-left shadow-sm border border-amber-100 hover:shadow-md hover:border-amber-200 transition-all"
     >
       {/* 顶行：书名 + 状态 */}
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2 min-w-0">
-          <svg className="h-4 w-4 text-indigo-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="h-4 w-4 text-amber-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
           </svg>
           <h3 className="font-semibold text-gray-900 truncate">
@@ -31,7 +31,7 @@ export default function ForkCard({ fork, onClick }: Props) {
       {/* 领域 + 页码 */}
       <div className="flex items-center gap-3 text-sm text-gray-500 mb-2">
         {fork.domain && (
-          <span className="inline-flex items-center rounded-md bg-indigo-50 px-2 py-0.5 text-xs font-medium text-indigo-700">
+          <span className="inline-flex items-center rounded-md bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
             {fork.domain}
           </span>
         )}

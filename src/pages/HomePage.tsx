@@ -71,11 +71,11 @@ export default function HomePage({ onNewFork, onSelectFork }: Props) {
           {[1, 2, 3].map((i) => (
             <div
               key={i}
-              className="animate-pulse rounded-xl bg-white p-4 border border-gray-100"
+              className="animate-pulse rounded-xl bg-white p-4 border border-amber-100"
             >
               <div className="mb-2 h-5 w-1/3 rounded bg-gray-200" />
-              <div className="mb-2 h-4 w-1/4 rounded bg-gray-100" />
-              <div className="h-4 w-2/3 rounded bg-gray-100" />
+              <div className="mb-2 h-4 w-1/4 rounded bg-amber-50" />
+              <div className="h-4 w-2/3 rounded bg-amber-50" />
             </div>
           ))}
         </div>

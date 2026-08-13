@@ -97,7 +97,7 @@ export default function ForkDetailPage({ forkId, onBack, onDeleted }: Props) {
       <div className="animate-pulse space-y-4">
         <div className="h-8 w-24 rounded bg-gray-200" />
         {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="h-32 rounded-xl bg-gray-100" />
+          <div key={i} className="h-32 rounded-xl bg-amber-50" />
         ))}
       </div>
     );
@@ -113,7 +113,7 @@ export default function ForkDetailPage({ forkId, onBack, onDeleted }: Props) {
         <button
           type="button"
           onClick={onBack}
-          className="text-indigo-600 hover:underline"
+          className="text-amber-600 hover:underline"
         >
           返回列表
         </button>

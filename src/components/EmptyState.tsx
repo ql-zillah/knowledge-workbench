@@ -6,9 +6,9 @@ export default function EmptyState({ onNewFork }: Props) {
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center">
       {/* 图标 */}
-      <div className="mb-6 rounded-full bg-indigo-50 p-5">
+      <div className="mb-6 rounded-full bg-amber-100 p-5">
         <svg
-          className="h-12 w-12 text-indigo-400"
+          className="h-12 w-12 text-amber-500"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -33,7 +33,7 @@ export default function EmptyState({ onNewFork }: Props) {
       <button
         type="button"
         onClick={onNewFork}
-        className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-indigo-700 transition-colors shadow-sm"
+        className="inline-flex items-center gap-2 rounded-xl bg-amber-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-amber-600 transition-colors shadow-sm"
       >
         <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />

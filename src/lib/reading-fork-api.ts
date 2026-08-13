@@ -62,6 +62,10 @@ export async function fetchFork(id: string): Promise<ReadingFork | null> {
 export async function createFork(
   input: ForkCreateInput
 ): Promise<ReadingFork> {
+  // 获取当前登录用户
+  const { data: { session } } = await supabase.auth.getSession();
+  const userId = session?.user?.id;
+
   const { data, error } = await supabase
     .from(TABLE)
     .insert({
@@ -69,6 +73,7 @@ export async function createFork(
       page_number: input.page_number ?? null,
       domain: input.domain || '',
       thought: input.thought || '',
+      user_id: userId, // 关联到当前用户
     })
     .select()
     .single();
@@ -82,9 +87,13 @@ export async function updateFork(
   id: string,
   updates: Partial<ReadingFork>
 ): Promise<ReadingFork> {
+  // 获取当前用户
+  const { data: { session } } = await supabase.auth.getSession();
+  const userId = session?.user?.id;
+
   const { data, error } = await supabase
     .from(TABLE)
-    .update(updates)
+    .update({ ...updates, user_id: userId }) // 确保旧数据也关联到当前用户
     .eq('id', id)
     .select()
     .single();
